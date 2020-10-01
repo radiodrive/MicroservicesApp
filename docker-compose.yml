@@ -4,8 +4,28 @@ services:
     catalogdb:
         image: mongo
 
+    basketdb:
+        image: redis
+
+    rabbitmq:
+        image: rabbitmq:3-management-alpine
+
     catalog.api:
         image: ${DOCKER_REGISTRY-}catalogapi
         build:
             context: .
             dockerfile: src/Catalog/Catalog.API/Dockerfile
+
+    basketapi:
+        image: ${DOCKER_REGISTRY-}basketapi
+        build:
+          context: .
+          dockerfile: src/Basket/BasketAPI/Dockerfile
+
+
+    ocelotapigateway:
+        image: ${DOCKER_REGISTRY-}ocelotapigateway
+        build:
+          context: .
+          dockerfile: src/APIGateway/OcelotAPIGateway/Dockerfile
+
